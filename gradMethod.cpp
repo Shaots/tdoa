@@ -4,14 +4,14 @@
 
 #include "gradMethod.h"
 
-double gradMethod::F(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD) {
+double gradMethod::F(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     return (point::distance(A, B) - point::distance(A, C) - AB_AC) *
            (point::distance(A, B) - point::distance(A, C) - AB_AC) +
            (point::distance(A, B) - point::distance(A, D) - AB_AD) *
            (point::distance(A, B) - point::distance(A, D) - AB_AD);
 }
 
-double gradMethod::dF_dax(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD) {
+double gradMethod::dF_dax(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка А != B, A != C, A != D
     return (point::distance(A, B) - point::distance(A, C) - AB_AC) * 2 *
            ((A.x - B.x) / point::distance(A, B) - (A.x - C.x) / point::distance(A, C)) +
@@ -19,7 +19,7 @@ double gradMethod::dF_dax(const point& A, const point& B, const point& C, const 
            ((A.x - B.x) / point::distance(A, B) - (A.x - D.x) / point::distance(A, D));
 }
 
-double gradMethod::dF_day(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD) {
+double gradMethod::dF_day(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка А != B, A != C, A != D
     return (point::distance(A, B) - point::distance(A, C) - AB_AC) * 2 *
            ((A.y - B.y) / point::distance(A, B) - (A.y - C.y) / point::distance(A, C)) +
@@ -27,11 +27,20 @@ double gradMethod::dF_day(const point& A, const point& B, const point& C, const 
            ((A.y - B.y) / point::distance(A, B) - (A.y - D.y) / point::distance(A, D));
 }
 
-point gradMethod::grad(const point& B, const point& C, const point& D, double AB_AC, double AB_AD) {
+point gradMethod::grad(const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
+    //параметр, определяющий условие окончания вычислений eps \in (0, 1)
     const double eps = pow(10, -7);
+
+    // Начальный шаг \in (0, 1)
     const double alpha0 = 0.9;
+
+    // шаг
     double alpha;
+
+    // Коэффициент дробления, \lambda \in (0, 1)
     const double lambda = 0.95;
+
+    // коэффициент, определяющий шаг \in (0, 1)
     const double delta = 0.8;
 
     point A1{100.0, 100.0};
