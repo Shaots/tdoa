@@ -1,7 +1,3 @@
-//
-// Created by Lenovo on 26.05.2024.
-//
-
 #include "gradMethod.h"
 
 double gradMethod::F(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
@@ -13,18 +9,26 @@ double gradMethod::F(const point &A, const point &B, const point &C, const point
 
 double gradMethod::dF_dax(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка А != B, A != C, A != D
-    return (point::distance(A, B) - point::distance(A, C) - AB_AC) * 2 *
-           ((A.x - B.x) / point::distance(A, B) - (A.x - C.x) / point::distance(A, C)) +
-           (point::distance(A, B) - point::distance(A, D) - AB_AD) * 2 *
-           ((A.x - B.x) / point::distance(A, B) - (A.x - D.x) / point::distance(A, D));
+    double AB = point::distance(A, B);
+    double AC = point::distance(A, C);
+    double AD = point::distance(A, D);
+    double dAB_dx = (A == B) ? 0 : (A.x - B.x) / AB;
+    double dAC_dx = (A == C) ? 0 : (A.x - C.x) / AC;
+    double dAD_dx = (A == D) ? 0 : (A.x - D.x) / AD;
+    return (AB - AC - AB_AC) * 2 * (dAB_dx - dAC_dx) +
+           (AB - AD - AB_AD) * 2 * (dAB_dx - dAD_dx);
 }
 
 double gradMethod::dF_day(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка А != B, A != C, A != D
-    return (point::distance(A, B) - point::distance(A, C) - AB_AC) * 2 *
-           ((A.y - B.y) / point::distance(A, B) - (A.y - C.y) / point::distance(A, C)) +
-           (point::distance(A, B) - point::distance(A, D) - AB_AD) * 2 *
-           ((A.y - B.y) / point::distance(A, B) - (A.y - D.y) / point::distance(A, D));
+    double AB = point::distance(A, B);
+    double AC = point::distance(A, C);
+    double AD = point::distance(A, D);
+    double dAB_dy = (A == B) ? 0 : (A.y - B.y) / AB;
+    double dAC_dy = (A == C) ? 0 : (A.y - C.y) / AC;
+    double dAD_dy = (A == D) ? 0 : (A.y - D.y) / AD;
+    return (AB - AC - AB_AC) * 2 * (dAB_dy - dAC_dy) +
+           (AB - AD - AB_AD) * 2 * (dAB_dy - dAD_dy);
 }
 
 point gradMethod::grad(const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {

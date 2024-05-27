@@ -5,13 +5,15 @@
 
 class gradMethod {
 public:
-    static double F(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD);
+    // AB_AC -- это AB - AC
+    // AB_AD -- это AB - AD
+    static double F(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD);
 
-    static double dF_dax(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD);
+    static double dF_dax(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD);
 
-    static double dF_day(const point& A, const point& B, const point& C, const point& D, double AB_AC, double AB_AD);
+    static double dF_day(const point &A, const point &B, const point &C, const point &D, double AB_AC, double AB_AD);
 
-    static point grad(const point& B, const point& C, const point& D, double AB_AC, double AB_AD);
+    static point grad(const point &B, const point &C, const point &D, double AB_AC, double AB_AD);
 };
 
 
