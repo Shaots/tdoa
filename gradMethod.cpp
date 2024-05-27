@@ -9,26 +9,26 @@ double grad::F(const point &P, const point &B, const point &C, const point &D, d
 
 double grad::dF_dx(const point &P, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка P != B, P != C, P != D
-    double AB = point::distance(P, B);
-    double AC = point::distance(P, C);
-    double AD = point::distance(P, D);
-    double dAB_dx = (P == B) ? 0 : (P.x - B.x) / AB;
-    double dAC_dx = (P == C) ? 0 : (P.x - C.x) / AC;
-    double dAD_dx = (P == D) ? 0 : (P.x - D.x) / AD;
-    return (AB - AC - AB_AC) * 2 * (dAB_dx - dAC_dx) +
-           (AB - AD - AB_AD) * 2 * (dAB_dx - dAD_dx);
+    double PB = point::distance(P, B);
+    double PC = point::distance(P, C);
+    double PD = point::distance(P, D);
+    double dPB_dx = (P == B) ? point::sgn(P.x - B.x) : (P.x - B.x) / PB;
+    double dPC_dx = (P == C) ? point::sgn(P.x - C.x) : (P.x - C.x) / PC;
+    double dPD_dx = (P == D) ? point::sgn(P.x - D.x) : (P.x - D.x) / PD;
+    return (PB - PC - AB_AC) * 2 * (dPB_dx - dPC_dx) +
+           (PB - PD - AB_AD) * 2 * (dPB_dx - dPD_dx);
 }
 
 double grad::dF_dy(const point &P, const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     // проверка P != B, P != C, P != D
-    double AB = point::distance(P, B);
-    double AC = point::distance(P, C);
-    double AD = point::distance(P, D);
-    double dAB_dy = (P == B) ? 0 : (P.y - B.y) / AB;
-    double dAC_dy = (P == C) ? 0 : (P.y - C.y) / AC;
-    double dAD_dy = (P == D) ? 0 : (P.y - D.y) / AD;
-    return (AB - AC - AB_AC) * 2 * (dAB_dy - dAC_dy) +
-           (AB - AD - AB_AD) * 2 * (dAB_dy - dAD_dy);
+    double PB = point::distance(P, B);
+    double PC = point::distance(P, C);
+    double PD = point::distance(P, D);
+    double dPB_dy = (P == B) ? point::sgn(P.y - B.y) : (P.y - B.y) / PB;
+    double dPC_dy = (P == C) ? point::sgn(P.y - C.y) : (P.y - C.y) / PC;
+    double dPD_dy = (P == D) ? point::sgn(P.y - D.y) : (P.y - D.y) / PD;
+    return (PB - PC - AB_AC) * 2 * (dPB_dy - dPC_dy) +
+           (PB - PD - AB_AD) * 2 * (dPB_dy - dPD_dy);
 }
 
 point grad::gradMethod(const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
@@ -48,9 +48,8 @@ point grad::gradMethod(const point &B, const point &C, const point &D, double AB
     const double delta = 0.8;
 
     // Начальное приближение
-    point A1{0, 0};
+    point A1{(B.x + C.x + D.x), (B.y + C.y + D.y)};
     point A2{0, 0};
-    point::paint(A1);
 
     // Условие внешнего цикла
     bool flag1 = true;

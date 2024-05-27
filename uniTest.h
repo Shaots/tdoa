@@ -7,6 +7,9 @@
 
 class uniTest {
 public:
+    //
+    static void testOnePoint(const point& B, const point& C, const point& D, double AB_AC, double AB_AD);
+
     static void test();
 };
 

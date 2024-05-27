@@ -7,8 +7,8 @@ class grad {
 public:
     // P = (x, y) аргумент
     // B C D -- заданные точки
-    // AB_AC -- это AB - AC
-    // AB_AD -- это AB - AD
+    // AB_AC -- это AB - AC разность хода
+    // AB_AD -- это AB - AD разность хода
     // F -- целевая функция
     static double F(const point &P, const point &B, const point &C, const point &D, double AB_AC, double AB_AD);
 

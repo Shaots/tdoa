@@ -1,12 +1,33 @@
 #include "uniTest.h"
 
-void uniTest::test() {
-    const point B = {0.0, 0.0};
-    const point C = {1918.6593908214895, 4770.574154674195};
-    const point D = {4111.911492926018, 3661.9046769939555};
-    double AB_AC = -205.8;
-    double AB_AD = -857.5;
+void uniTest::testOnePoint(const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
     point A = grad::gradMethod(B, C, D, AB_AC, AB_AD);
     point::paint(A);
-    std::cout << grad::F(A, B, C, D, AB_AC, AB_AD) << std::endl;
+}
+
+void uniTest::test() {
+    const point D = {-1.0, -1.0};
+    const point E = {1.0, 0.0};
+    const point F = {0.0, 1.0};
+
+    // Тривиальный случай
+    double AD_AE = 0;
+    double AD_AF = 0;
+    std::cout << "Point A = ";
+    uniTest::testOnePoint(D, E, F, AD_AE, AD_AF);
+    std::cout << "Answer (-1/6, -1/6)" << std::endl << std::endl;
+
+    // Нетривиальный случай
+    std::cout << "Point B = ";
+    double BD_BE = sqrt(2) - sqrt(5);
+    double BD_BF = sqrt(2) - 3;
+    uniTest::testOnePoint(D, E, F, BD_BE, BD_BF);
+    std::cout << "Answer (0, -2)" << std::endl << std::endl;
+
+    std::cout << "Point C = ";
+    double CD_CE = sqrt(2) - 3;
+    double CD_CF = sqrt(2) - sqrt(5);
+    uniTest::testOnePoint(D, E, F, CD_CE, CD_CF);
+    std::cout << "Answer (-2, 0)" << std::endl;
+
 }

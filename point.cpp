@@ -17,6 +17,9 @@ bool point::approximatelyEqual(double a, double b, double epsilon) {
     return diff <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
 
+int point::sgn(double val) {
+    return (double(0) < val) - (val < double(0));
+}
 
 point::point(double x, double y) : x(x), y(y) {}
 
@@ -45,3 +48,5 @@ bool point::operator==(const point &p) const {
     else
         return false;
 }
+
+

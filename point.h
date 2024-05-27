@@ -12,6 +12,8 @@ public:
 
     static bool approximatelyEqual(double a, double b, double epsilon);
 
+    static int sgn(double val);
+
 public:
     point(double x, double y);
 
