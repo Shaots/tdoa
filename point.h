@@ -10,10 +10,16 @@ public:
 
     static void paint(point p);
 
+    static bool approximatelyEqual(double a, double b, double epsilon);
+
 public:
     point(double x, double y);
 
     point &operator=(const point &src);
+
+    point &operator*(double alpha);
+
+    bool operator==(const point &p) const;
 
 public:
     double x;
