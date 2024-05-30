@@ -1,30 +1,46 @@
-#include "point.h"
+#include "Point.h"
 
-double point::distance(point p1, point p2) {
+double Point::distance(Point p1, Point p2) {
     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
 
-void point::paint(point p) {
+void Point::paint(Point p) {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
 }
 
 
-bool point::approximatelyEqual(double a, double b, double epsilon) {
+bool Point::approximatelyEqual(double a, double b, double epsilon) {
     double diff = fabs(a - b);
     if (diff <= epsilon)
         return true;
     return diff <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
 
-int point::sgn(double val) {
+int Point::sgn(double val) {
     return (double(0) < val) - (val < double(0));
 }
 
-point::point(double x, double y) : x(x), y(y) {}
+double Point::getX() const {
+    return x;
+}
+
+double Point::getY() const {
+    return y;
+}
+
+void Point::setX(double x_) {
+    x = x_;
+}
+
+void Point::setY(double y_) {
+    y = y_;
+}
+
+Point::Point(double x, double y) : x(x), y(y) {}
 
 
-point &point::operator=(const point &src) {
+Point &Point::operator=(const Point &src) {
     if (&src != this) {
         x = src.x;
         y = src.y;
@@ -33,17 +49,17 @@ point &point::operator=(const point &src) {
 }
 
 
-point &point::operator*(double alpha) {
+Point &Point::operator*(double alpha) {
     x *= alpha;
     y *= alpha;
     return *this;
 }
 
 
-bool point::operator==(const point &p) const {
+bool Point::operator==(const Point &p) const {
     double eps = pow(10, -3);
-    if (point::approximatelyEqual(x, p.x, eps)
-        && point::approximatelyEqual(y, p.y, eps))
+    if (Point::approximatelyEqual(x, p.x, eps)
+        && Point::approximatelyEqual(y, p.y, eps))
         return true;
     else
         return false;

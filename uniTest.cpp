@@ -1,14 +1,14 @@
 #include "uniTest.h"
 
-void uniTest::testOnePoint(const point &B, const point &C, const point &D, double AB_AC, double AB_AD) {
-    point A = grad::gradMethod(B, C, D, AB_AC, AB_AD);
-    point::paint(A);
+void uniTest::testOnePoint(const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {
+    Point A = grad::gradMethod(B, C, D, AB_AC, AB_AD);
+    Point::paint(A);
 }
 
 void uniTest::test() {
-    const point D = {-1.0, -1.0};
-    const point E = {1.0, 0.0};
-    const point F = {0.0, 1.0};
+    const Point D = {-1.0, -1.0};
+    const Point E = {1.0, 0.0};
+    const Point F = {0.0, 1.0};
 
     // Тривиальный случай
     double AD_AE = 0;
