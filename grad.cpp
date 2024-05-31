@@ -1,8 +1,8 @@
 #include "grad.h"
 
-double grad::F(const Point &A, const Point &B, const Point &C,
-               const Point &D, const Point &E, const Point &F,
-               double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
+double grad::Fun(const Point &A, const Point &B, const Point &C,
+                 const Point &D, const Point &E, const Point &F,
+                 double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
 
     return (Point::distance(A, D) - Point::distance(B, D) - AD_BD) *
            (Point::distance(A, D) - Point::distance(B, D) - AD_BD) +
