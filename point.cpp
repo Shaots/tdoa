@@ -4,6 +4,13 @@ double Point::distance(Point p1, Point p2) {
     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
+Point Point::multiply(Point p, double alpha) {
+    return Point{p.getX() * alpha, p.getY() * alpha};
+}
+
+Point Point::difference(Point p1, Point p2) {
+    return Point{p1.getX() - p2.getX(), p1.getY() - p2.getY()};
+}
 
 void Point::paint(Point p) {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
