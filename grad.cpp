@@ -112,4 +112,10 @@ Point grad::gradMethod(const Point &B, const Point &C, const Point &D, double AB
 }
 
 
-
+double grad::norm2Square(std::array<Point, grad::numPoints> grad) {
+    Point A = grad[0];
+    Point B = grad[1];
+    Point C = grad[2];
+    return A.getX() * A.getX() + A.getY() * A.getY() + B.getX() * B.getX() + B.getY() * B.getY()
+           + C.getX() * C.getX() + C.getY() * C.getY();
+}
