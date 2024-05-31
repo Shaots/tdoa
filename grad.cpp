@@ -1,10 +1,23 @@
 #include "grad.h"
 
-double grad::F(const Point &P, const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {
-    return (Point::distance(P, B) - Point::distance(P, C) - AB_AC) *
-           (Point::distance(P, B) - Point::distance(P, C) - AB_AC) +
-           (Point::distance(P, B) - Point::distance(P, D) - AB_AD) *
-           (Point::distance(P, B) - Point::distance(P, D) - AB_AD);
+double grad::F(const Point &A, const Point &B, const Point &C,
+               const Point &D, const Point &E, const Point &F,
+               double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
+
+    return (Point::distance(A, D) - Point::distance(B, D) - AD_BD) *
+           (Point::distance(A, D) - Point::distance(B, D) - AD_BD) +
+           (Point::distance(A, D) - Point::distance(C, D) - AD_CD) *
+           (Point::distance(A, D) - Point::distance(C, D) - AD_CD) +
+           (Point::distance(A, E) - Point::distance(B, E) - AE_BE) *
+           (Point::distance(A, E) - Point::distance(B, E) - AE_BE) +
+           (Point::distance(A, E) - Point::distance(C, E) - AE_CE) *
+           (Point::distance(A, E) - Point::distance(C, E) - AE_CE) +
+           (Point::distance(A, F) - Point::distance(B, F) - AF_BF) *
+           (Point::distance(A, F) - Point::distance(B, F) - AF_BF) +
+           (Point::distance(A, F) - Point::distance(C, F) - AF_CF) *
+           (Point::distance(A, F) - Point::distance(C, F) - AF_CF);
+
+
 }
 
 double grad::dF_dx(const Point &P, const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {
@@ -17,18 +30,6 @@ double grad::dF_dx(const Point &P, const Point &B, const Point &C, const Point &
     double dPD_dx = (P == D) ? Point::sgn(P.getX() - D.getX()) : (P.getX() - D.getX()) / PD;
     return (PB - PC - AB_AC) * 2 * (dPB_dx - dPC_dx) +
            (PB - PD - AB_AD) * 2 * (dPB_dx - dPD_dx);
-}
-
-double grad::dF_dy(const Point &P, const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {
-    // проверка P != B, P != C, P != D
-    double PB = Point::distance(P, B);
-    double PC = Point::distance(P, C);
-    double PD = Point::distance(P, D);
-    double dPB_dy = (P == B) ? Point::sgn(P.getY() - B.getY()) : (P.getY() - B.getY()) / PB;
-    double dPC_dy = (P == C) ? Point::sgn(P.getY() - C.getY()) : (P.getY() - C.getY()) / PC;
-    double dPD_dy = (P == D) ? Point::sgn(P.getY() - D.getY()) : (P.getY() - D.getY()) / PD;
-    return (PB - PC - AB_AC) * 2 * (dPB_dy - dPC_dy) +
-           (PB - PD - AB_AD) * 2 * (dPB_dy - dPD_dy);
 }
 
 Point grad::gradMethod(const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {

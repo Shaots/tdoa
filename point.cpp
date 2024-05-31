@@ -37,6 +37,11 @@ void Point::setY(double y_) {
     y = y_;
 }
 
+Point::Point() {
+    x = 0;
+    y = 0;
+}
+
 Point::Point(double x, double y) : x(x), y(y) {}
 
 
@@ -64,5 +69,3 @@ bool Point::operator==(const Point &p) const {
     else
         return false;
 }
-
-

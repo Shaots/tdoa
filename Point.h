@@ -25,6 +25,8 @@ public:
 
 
 public:
+    Point();
+
     Point(double x, double y);
 
     Point &operator=(const Point &src);
