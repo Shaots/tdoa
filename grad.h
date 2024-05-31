@@ -17,11 +17,13 @@ public:
                     const Point &D, const Point &E, const Point &F,
                     double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
 
-    // Частная производная dF/dx
-    static double dF_dx(const Point &P, const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD);
+    // Три искомой точки (A, B, C)
+    static const int numPoints = 3;
 
-    // Частная производная dF/dy
-    static double dF_dy(const Point &P, const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD);
+    // Градиент функции F
+    static std::array<Point, numPoints> gradient(const Point &A, const Point &B, const Point &C,
+                                      const Point &D, const Point &E, const Point &F,
+                                      double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
 
     // градиентный метод с дроблением шага
     static Point gradMethod(const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD);
