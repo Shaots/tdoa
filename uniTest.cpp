@@ -1,33 +1,27 @@
 #include "uniTest.h"
 
-void uniTest::testOnePoint(const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD) {
-    Point A = grad::gradMethod(B, C, D, AB_AC, AB_AD);
-    Point::paint(A);
-}
-
 void uniTest::test() {
     const Point D = {-1.0, -1.0};
     const Point E = {1.0, 0.0};
     const Point F = {0.0, 1.0};
 
-    // Тривиальный случай
-    double AD_AE = 0;
-    double AD_AF = 0;
-    std::cout << "Point A = ";
-    uniTest::testOnePoint(D, E, F, AD_AE, AD_AF);
-    std::cout << "Answer (-1/6, -1/6)" << std::endl << std::endl;
+    double AD_BD = 0;
+    double AD_CD = 2 - 2 * sqrt(2);
+    double AE_BE = sqrt(5) - 1;
+    double AE_CE = sqrt(5) - 1;
+    double AF_BF = 1 - sqrt(5);
+    double AF_CF = 0;
 
-    // Нетривиальный случай
-    std::cout << "Point B = ";
-    double BD_BE = sqrt(2) - sqrt(5);
-    double BD_BF = sqrt(2) - 3;
-    uniTest::testOnePoint(D, E, F, BD_BE, BD_BF);
-    std::cout << "Answer (0, -2)" << std::endl << std::endl;
+    std::array<Point, grad::numPoints> ABC = grad::gradMethod(D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
+    std::cout << "A = ";
+    Point::paint(ABC[0]);
+    std::cout << "B = ";
+    Point::paint(ABC[1]);
+    std::cout << "C = ";
+    Point::paint(ABC[2]);
 
-    std::cout << "Point C = ";
-    double CD_CE = sqrt(2) - 3;
-    double CD_CF = sqrt(2) - sqrt(5);
-    uniTest::testOnePoint(D, E, F, CD_CE, CD_CF);
-    std::cout << "Answer (-2, 0)" << std::endl;
-
+    std::cout << "\nAnswer:" << std::endl;
+    std::cout << "A = (-1, 1)" << std::endl;
+    std::cout << "B = (1, -1)" << std::endl;
+    std::cout << "C = (1, 1)" << std::endl;
 }
