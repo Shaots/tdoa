@@ -25,7 +25,11 @@ public:
                                       double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
 
     // градиентный метод с дроблением шага
-    static Point gradMethod(const Point &B, const Point &C, const Point &D, double AB_AC, double AB_AD);
+    static std::array<Point, numPoints> gradMethod(const Point &D, const Point &E, const Point &F,
+                            double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
+
+    // Квадрат второй нормы для градиента
+    static double norm2Square(std::array<Point, numPoints> grad);
 };
 
 
