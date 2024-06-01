@@ -5,11 +5,11 @@ double Point::distance(Point p1, Point p2) {
 }
 
 Point Point::multiply(Point p, double alpha) {
-    return Point{p.getX() * alpha, p.getY() * alpha};
+    return Point{p.x * alpha, p.y * alpha};
 }
 
 Point Point::difference(Point p1, Point p2) {
-    return Point{p1.getX() - p2.getX(), p1.getY() - p2.getY()};
+    return Point{p1.x - p2.x, p1.y - p2.y};
 }
 
 std::string Point::toString(Point p) {
