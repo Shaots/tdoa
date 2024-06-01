@@ -12,7 +12,7 @@ public:
 
     static Point difference(Point p1, Point p2);
 
-    static void paint(Point p);
+    static std::string toString(Point p);
 
 public:
     double getX() const;

@@ -12,8 +12,8 @@ Point Point::difference(Point p1, Point p2) {
     return Point{p1.getX() - p2.getX(), p1.getY() - p2.getY()};
 }
 
-void Point::paint(Point p) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
+std::string Point::toString(Point p) {
+    return "(" + std::to_string(p.x) + ", " + std::to_string(p.y) + ")";
 }
 
 double Point::getX() const {
@@ -47,6 +47,8 @@ Point &Point::operator=(const Point &src) {
     }
     return *this;
 }
+
+
 
 
 
