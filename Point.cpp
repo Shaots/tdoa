@@ -47,8 +47,3 @@ Point &Point::operator=(const Point &src) {
     }
     return *this;
 }
-
-
-
-
-
