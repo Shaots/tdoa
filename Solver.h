@@ -12,10 +12,6 @@ public:
     // Три искомой точки (A, B, C)
     static const int numPoints = 3;
 
-private:
-    // Квадрат второй нормы для градиента
-    static double norm2Square(const std::array<Point, numPoints> &grad);
-
     // Member
 public:
     Solver(const Point &D, const Point &E, const Point &F,

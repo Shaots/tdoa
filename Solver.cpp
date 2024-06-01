@@ -1,10 +1,5 @@
 #include "Solver.h"
-
-double Solver::norm2Square(const std::array<Point, numPoints> &grad) {
-    return grad[0].getX() * grad[0].getX() + grad[0].getY() * grad[0].getY()
-           + grad[1].getX() * grad[1].getX() + grad[1].getY() * grad[1].getY()
-           + grad[2].getX() * grad[2].getX() + grad[2].getY() * grad[2].getY();
-}
+#include "SupportFunc.h"
 
 Solver::Solver(const Point &D, const Point &E, const Point &F, double AD_BD, double AD_CD, double AE_BE, double AE_CE,
                double AF_BF, double AF_CF)
@@ -48,11 +43,11 @@ std::array<Point, Solver::numPoints> Solver::gradMethod() {
             ABC2[2] = Point::difference(ABC1[2], Point::multiply(grad1[2], alpha));
             flag2 = Fun(ABC2[0], ABC2[1], ABC2[2]) -
                     Fun(ABC1[0], ABC1[1], ABC1[2]) >
-                    -alpha * delta * Solver::norm2Square(grad1);
+                    -alpha * delta * norm2Square(grad1);
             alpha *= lambda;
         } while (flag2);
         std::array<Point, numPoints> grad2 = gradient(ABC2[0], ABC2[1], ABC2[2]);
-        flag1 = Solver::norm2Square(grad2) > eps * eps;
+        flag1 = norm2Square(grad2) > eps * eps;
         ABC1 = ABC2;
     } while (flag1);
     return ABC2;
