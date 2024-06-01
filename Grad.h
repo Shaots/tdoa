@@ -29,7 +29,7 @@ public:
                             double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
 
     // Квадрат второй нормы для градиента
-    static double norm2Square(std::array<Point, numPoints> grad);
+    static double norm2Square(const std::array<Point, numPoints> &grad);
 };
 
 
