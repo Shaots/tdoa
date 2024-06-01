@@ -5,9 +5,7 @@ Solver::Solver(const Point &D, const Point &E, const Point &F, double AD_BD, dou
                double AF_BF, double AF_CF)
         : D(D), E(E), F(F), AD_BD(AD_BD), AD_CD(AD_CD), AE_BE(AE_BE), AE_CE(AE_CE), AF_BF(AF_BF), AF_CF(AF_CF) {}
 
-std::array<Point, Solver::numPoints> Solver::gradMethod() {
-    //параметр, определяющий условие окончания вычислений eps \in (0, 1)
-    const double eps = pow(10, -5);
+std::array<Point, Solver::numPoints> Solver::gradMethod(double residual) {
 
     // Начальный шаг \in (0, 1)
     const double alpha0 = 0.9;
@@ -47,7 +45,7 @@ std::array<Point, Solver::numPoints> Solver::gradMethod() {
             alpha *= lambda;
         } while (flag2);
         std::array<Point, numPoints> grad2 = gradient(ABC2[0], ABC2[1], ABC2[2]);
-        flag1 = norm2Square(grad2) > eps * eps;
+        flag1 = norm2Square(grad2) > residual * residual;
         ABC1 = ABC2;
     } while (flag1);
     return ABC2;

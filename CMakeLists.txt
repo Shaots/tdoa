@@ -3,4 +3,4 @@ project(tdoa)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(tdoa main.cpp point.cpp Solver.cpp uniTest.cpp SupportFunc.cpp)
+add_executable(tdoa main.cpp Point.cpp Solver.cpp uniTest.cpp SupportFunc.cpp)

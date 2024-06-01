@@ -13,13 +13,14 @@ void uniTest::test() {
     double AF_CF = 0;
 
     Solver solver(D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
-    std::array<Point, Solver::numPoints> ABC = solver.gradMethod();
-    std::cout << "A = " + Point::toString(ABC[0]) << std::endl;
-    std::cout << "B = " + Point::toString(ABC[1]) << std::endl;
-    std::cout << "C = " + Point::toString(ABC[2]) << std::endl;
-
-    std::cout << "\nAnswer:" << std::endl;
-    std::cout << "A = (-1, 1)" << std::endl;
-    std::cout << "B = (1, -1)" << std::endl;
-    std::cout << "C = (1, 1)" << std::endl;
+    double residual = 1e-5;
+    std::array<Point, Solver::numPoints> ABC = solver.gradMethod(residual);
+    bool accept = true;
+    const Point A = {-1.0, 1.0};
+    const Point B = {1.0, -1.0};
+    const Point C = {1.0, 1.0};
+    accept = (ABC[0].getX() - A.getX()) * (ABC[0].getX() - A.getX()) + (ABC[0].getY() - A.getY()) * (ABC[0].getY() - A.getY()) < 1e-5
+             && (ABC[1].getX() - B.getX()) * (ABC[1].getX() - B.getX()) + (ABC[1].getY() - B.getY()) * (ABC[1].getY() - B.getY()) < 1e-5
+             && (ABC[2].getX() - C.getX()) * (ABC[2].getX() - C.getX()) + (ABC[2].getY() - C.getY()) * (ABC[2].getY() - C.getY()) < 1e-5;
+    std::cout << "Test simple problem: " << (accept ? "Pass" : "Not pass") << std::endl;
 }
