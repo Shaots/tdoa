@@ -5,13 +5,13 @@
 #include <array>
 #include "Point.h"
 
-class grad {
+class Grad {
 public:
     // A B C -- неизвестные точки
     // D E F -- известные точки
     // AB_AC -- это AB - AC разность хода, аналогично для других
     // Fun -- целевая функция, зависящая от 6 аргументов
-    // F = Fun(Ax, Ay, Bx, By, Cx, Cy)
+    // Fun = Fun(Ax, Ay, Bx, By, Cx, Cy)
     static double Fun(const Point &A, const Point &B, const Point &C,
                       const Point &D, const Point &E, const Point &F,
                       double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);

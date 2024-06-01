@@ -1,6 +1,6 @@
-#include "grad.h"
+#include "Grad.h"
 
-double grad::Fun(const Point &A, const Point &B, const Point &C,
+double Grad::Fun(const Point &A, const Point &B, const Point &C,
                  const Point &D, const Point &E, const Point &F,
                  double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
 
@@ -19,12 +19,12 @@ double grad::Fun(const Point &A, const Point &B, const Point &C,
 }
 
 
-std::array<Point, grad::numPoints>
-grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, const Point &E, const Point &F,
+std::array<Point, Grad::numPoints>
+Grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, const Point &E, const Point &F,
                double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
     std::array<Point, numPoints> grad;
 
-    // grad[0] = dF/dA
+    // Grad[0] = dF/dA
     double dFdAx =
             2 * (Point::distance(A, D) - Point::distance(B, D) - AD_BD) * (A.getX() - D.getX()) / Point::distance(A, D)
             +
@@ -53,7 +53,7 @@ grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, c
     grad[0].setX(dFdAx);
     grad[0].setY(dFdAy);
 
-    // grad[1] = dF/dB
+    // Grad[1] = dF/dB
     double dFdBx = 2 * (Point::distance(A, D) - Point::distance(B, D) - AD_BD) * (-1) * (B.getX() - D.getX()) /
                    Point::distance(B, D)
                    + 2 * (Point::distance(A, E) - Point::distance(B, E) - AE_BE) * (-1) * (B.getX() - E.getX()) /
@@ -70,7 +70,7 @@ grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, c
     grad[1].setX(dFdBx);
     grad[1].setY(dFdBy);
 
-    // grad[2] = dF/dC
+    // Grad[2] = dF/dC
     double dFdCx = 2 * (Point::distance(A, D) - Point::distance(C, D) - AD_CD) * (-1) * (C.getX() - D.getX()) /
                    Point::distance(C, D)
                    + 2 * (Point::distance(A, E) - Point::distance(C, E) - AE_CE) * (-1) * (C.getX() - E.getX()) /
@@ -89,7 +89,7 @@ grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, c
     return grad;
 }
 
-std::array<Point, grad::numPoints> grad::gradMethod(const Point &D, const Point &E, const Point &F,
+std::array<Point, Grad::numPoints> Grad::gradMethod(const Point &D, const Point &E, const Point &F,
                                                     double AD_BD, double AD_CD, double AE_BE, double AE_CE,
                                                     double AF_BF, double AF_CF) {
     //параметр, определяющий условие окончания вычислений eps \in (0, 1)
@@ -122,7 +122,7 @@ std::array<Point, grad::numPoints> grad::gradMethod(const Point &D, const Point 
     do {
         alpha = alpha0;
         do {
-            std::array<Point, numPoints> grad1 = grad::gradient(ABC1[0], ABC1[1], ABC1[2], D, E, F,
+            std::array<Point, numPoints> grad1 = Grad::gradient(ABC1[0], ABC1[1], ABC1[2], D, E, F,
                                                                 AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
 
             ABC2[0] = Point::difference(ABC1[0], Point::multiply(grad1[0], alpha));
@@ -130,12 +130,12 @@ std::array<Point, grad::numPoints> grad::gradMethod(const Point &D, const Point 
             ABC2[2] = Point::difference(ABC1[2], Point::multiply(grad1[2], alpha));
             flag2 = Fun(ABC2[0], ABC2[1], ABC2[2], D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF) -
                     Fun(ABC1[0], ABC1[1], ABC1[2], D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF) >
-                    -alpha * delta * grad::norm2Square(grad1);
+                    -alpha * delta * Grad::norm2Square(grad1);
             alpha *= lambda;
         } while (flag2);
-        std::array<Point, numPoints> grad2 = grad::gradient(ABC2[0], ABC2[1], ABC2[2], D, E, F,
+        std::array<Point, numPoints> grad2 = Grad::gradient(ABC2[0], ABC2[1], ABC2[2], D, E, F,
                                                             AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
-        flag1 = grad::norm2Square(grad2) > eps * eps;
+        flag1 = Grad::norm2Square(grad2) > eps * eps;
         ABC1[0] = ABC2[0];
         ABC1[1] = ABC2[1];
         ABC1[2] = ABC2[2];
@@ -144,7 +144,7 @@ std::array<Point, grad::numPoints> grad::gradMethod(const Point &D, const Point 
 }
 
 
-double grad::norm2Square(std::array<Point, grad::numPoints> grad) {
+double Grad::norm2Square(std::array<Point, Grad::numPoints> grad) {
     Point gradA = grad[0];
     Point gradB = grad[1];
     Point gradC = grad[2];

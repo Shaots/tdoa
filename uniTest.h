@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Point.h"
-#include "grad.h"
+#include "Grad.h"
 
 class uniTest {
 public:
