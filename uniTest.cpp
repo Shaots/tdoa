@@ -12,7 +12,7 @@ void uniTest::test() {
     double AF_BF = 1 - sqrt(5);
     double AF_CF = 0;
 
-    std::array<Point, Grad::numPoints> ABC = Grad::gradMethod(D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
+    std::array<Point, Solver::numPoints> ABC = Solver::gradMethod(D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
     std::cout << "A = " + Point::toString(ABC[0]) << std::endl;
     std::cout << "B = " + Point::toString(ABC[1]) << std::endl;
     std::cout << "C = " + Point::toString(ABC[2]) << std::endl;

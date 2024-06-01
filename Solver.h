@@ -1,11 +1,11 @@
-#ifndef TDOA_GRAD_H
-#define TDOA_GRAD_H
+#ifndef TDOA_SOLVER_H
+#define TDOA_SOLVER_H
 
 #include <iostream>
 #include <array>
 #include "Point.h"
 
-class Grad {
+class Solver {
 public:
     // Три искомой точки (A, B, C)
     static const int numPoints = 3;
@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif //TDOA_GRAD_H
+#endif //TDOA_SOLVER_H

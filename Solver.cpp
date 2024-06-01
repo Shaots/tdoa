@@ -1,8 +1,8 @@
-#include "Grad.h"
+#include "Solver.h"
 
-double Grad::Fun(const Point &A, const Point &B, const Point &C,
-                 const Point &D, const Point &E, const Point &F,
-                 double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
+double Solver::Fun(const Point &A, const Point &B, const Point &C,
+                   const Point &D, const Point &E, const Point &F,
+                   double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
 
     return (Point::distance(A, D) - Point::distance(B, D) - AD_BD) *
            (Point::distance(A, D) - Point::distance(B, D) - AD_BD) +
@@ -19,9 +19,9 @@ double Grad::Fun(const Point &A, const Point &B, const Point &C,
 }
 
 
-std::array<Point, Grad::numPoints>
-Grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, const Point &E, const Point &F,
-               double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
+std::array<Point, Solver::numPoints>
+Solver::gradient(const Point &A, const Point &B, const Point &C, const Point &D, const Point &E, const Point &F,
+                 double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF) {
     std::array<Point, numPoints> grad;
 
     // Grad[0] = dF/dA
@@ -89,9 +89,9 @@ Grad::gradient(const Point &A, const Point &B, const Point &C, const Point &D, c
     return grad;
 }
 
-std::array<Point, Grad::numPoints> Grad::gradMethod(const Point &D, const Point &E, const Point &F,
-                                                    double AD_BD, double AD_CD, double AE_BE, double AE_CE,
-                                                    double AF_BF, double AF_CF) {
+std::array<Point, Solver::numPoints> Solver::gradMethod(const Point &D, const Point &E, const Point &F,
+                                                        double AD_BD, double AD_CD, double AE_BE, double AE_CE,
+                                                        double AF_BF, double AF_CF) {
     //параметр, определяющий условие окончания вычислений eps \in (0, 1)
     const double eps = pow(10, -5);
 
@@ -122,27 +122,27 @@ std::array<Point, Grad::numPoints> Grad::gradMethod(const Point &D, const Point 
     do {
         alpha = alpha0;
         do {
-            std::array<Point, numPoints> grad1 = Grad::gradient(ABC1[0], ABC1[1], ABC1[2], D, E, F,
-                                                                AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
+            std::array<Point, numPoints> grad1 = Solver::gradient(ABC1[0], ABC1[1], ABC1[2], D, E, F,
+                                                                  AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
 
             ABC2[0] = Point::difference(ABC1[0], Point::multiply(grad1[0], alpha));
             ABC2[1] = Point::difference(ABC1[1], Point::multiply(grad1[1], alpha));
             ABC2[2] = Point::difference(ABC1[2], Point::multiply(grad1[2], alpha));
             flag2 = Fun(ABC2[0], ABC2[1], ABC2[2], D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF) -
                     Fun(ABC1[0], ABC1[1], ABC1[2], D, E, F, AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF) >
-                    -alpha * delta * Grad::norm2Square(grad1);
+                    -alpha * delta * Solver::norm2Square(grad1);
             alpha *= lambda;
         } while (flag2);
-        std::array<Point, numPoints> grad2 = Grad::gradient(ABC2[0], ABC2[1], ABC2[2], D, E, F,
-                                                            AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
-        flag1 = Grad::norm2Square(grad2) > eps * eps;
+        std::array<Point, numPoints> grad2 = Solver::gradient(ABC2[0], ABC2[1], ABC2[2], D, E, F,
+                                                              AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
+        flag1 = Solver::norm2Square(grad2) > eps * eps;
         ABC1 = ABC2;
     } while (flag1);
     return ABC2;
 }
 
 
-double Grad::norm2Square(const std::array<Point, numPoints> &grad) {
+double Solver::norm2Square(const std::array<Point, numPoints> &grad) {
     return grad[0].getX() * grad[0].getX() + grad[0].getY() * grad[0].getY()
          + grad[1].getX() * grad[1].getX() + grad[1].getY() * grad[1].getY()
          + grad[2].getX() * grad[2].getX() + grad[2].getY() * grad[2].getY();
