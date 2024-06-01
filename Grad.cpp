@@ -136,9 +136,7 @@ std::array<Point, Grad::numPoints> Grad::gradMethod(const Point &D, const Point 
         std::array<Point, numPoints> grad2 = Grad::gradient(ABC2[0], ABC2[1], ABC2[2], D, E, F,
                                                             AD_BD, AD_CD, AE_BE, AE_CE, AF_BF, AF_CF);
         flag1 = Grad::norm2Square(grad2) > eps * eps;
-        ABC1[0] = ABC2[0];
-        ABC1[1] = ABC2[1];
-        ABC1[2] = ABC2[2];
+        ABC1 = ABC2;
     } while (flag1);
     return ABC2;
 }
