@@ -17,7 +17,7 @@ public:
     Solver(const Point &D, const Point &E, const Point &F,
            double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
 
-    std::array<Point, numPoints> gradMethod();
+    std::array<Point, numPoints> gradMethod(double residual);
 
 private:
     // A B C -- неизвестные точки
