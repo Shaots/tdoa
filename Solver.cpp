@@ -1,15 +1,7 @@
 #include "Solver.h"
 #include "SupportFunc.h"
 
-Solver::Solver(const Point &D, const Point &E, const Point &F, double AD_BD, double AD_CD, double AE_BE, double AE_CE,
-               double AF_BF, double AF_CF)
-        : D(D), E(E), F(F), AD_BD(AD_BD), AD_CD(AD_CD), AE_BE(AE_BE), AE_CE(AE_CE), AF_BF(AF_BF), AF_CF(AF_CF) {}
-
-std::array<Point, Solver::numPoints> Solver::gradMethod(double residual) {
-
-    // Начальный шаг \in (0, 1)
-    const double alpha0 = 0.9;
-
+std::array<Point, Solver::numPoints> Solver::gradMethod(const Problem& problem) {
     // шаг
     double alpha;
 
