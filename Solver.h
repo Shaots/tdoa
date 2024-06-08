@@ -19,17 +19,7 @@ public:
 
     std::array<Point, numPoints> gradMethod(double residual);
 
-private:
-    // A B C -- неизвестные точки
-    // D E F -- известные точки
-    // AB_AC -- это AB - AC разность хода, аналогично для других
-    // Fun -- целевая функция, зависящая от 6 аргументов
-    // Fun = Fun(Ax, Ay, Bx, By, Cx, Cy)
-    double Fun(const Point &A, const Point &B, const Point &C);
-
-
-    // Градиент функции Fun
-    std::array<Point, numPoints> gradient(const Point &A, const Point &B, const Point &C);
+    std::array<Point, numPoints> gradMethod(const Problem& problem);
 
 private:
     const Point D;
