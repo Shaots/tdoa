@@ -13,12 +13,6 @@ std::array<Point, Solver::numPoints> Solver::gradMethod(double residual) {
     // шаг
     double alpha;
 
-    // Коэффициент дробления, \lambda \in (0, 1)
-    const double lambda = 0.95;
-
-    // коэффициент, определяющий шаг \in (0, 1)
-    const double delta = 0.8;
-
     // Начальное приближение
     // [0] = A
     // [1] = B

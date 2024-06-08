@@ -14,23 +14,23 @@ public:
 
     // Member
 public:
-    Solver(const Point &D, const Point &E, const Point &F,
-           double AD_BD, double AD_CD, double AE_BE, double AE_CE, double AF_BF, double AF_CF);
-
-    std::array<Point, numPoints> gradMethod(double residual);
+    Solver(double alpha0, double lambda, double delta, double residual)
+            : m_alpha0(alpha0), m_lambda(lambda), m_delta(delta), m_residual(residual) {}
 
     std::array<Point, numPoints> gradMethod(const Problem& problem);
 
 private:
-    const Point D;
-    const Point E;
-    const Point F;
-    const double AD_BD;
-    const double AD_CD;
-    const double AE_BE;
-    const double AE_CE;
-    const double AF_BF;
-    const double AF_CF;
+    // Начальный шаг \in (0, 1)
+    const double m_alpha0;
+
+    // Коэффициент дробления, \lambda \in (0, 1)
+    const double m_lambda;
+
+    // коэффициент, определяющий шаг \in (0, 1)
+    const double m_delta;
+
+    // Невязка
+    const double m_residual;
 };
 
 
