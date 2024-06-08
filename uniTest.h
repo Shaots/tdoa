@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Point.h"
+#include "Problem.h"
 #include "Solver.h"
 
 class uniTest {
