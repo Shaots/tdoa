@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include "Problem.h"
 #include "Point.h"
 
 class Solver {
